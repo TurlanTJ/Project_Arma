@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public interface IItem
+public abstract class IItem : MonoBehaviour
 {
-    int itemID {get; set;}
-    string itemName {get; set;}
-    bool isStackable {get; set;}
-    int currStack {get; set;}
-    int maxStack {get; set;}
+    public int itemID { get; protected set; }
+    public bool isStackable { get; protected set; }
+    public int currStack { get; protected set; }
+    public int maxStack { get; protected set; }
 
-    bool Use();
+    public string itemName;
+
+    public virtual void Use(){}
+
+    public void SetStackableSts(bool sts)
+    {
+        isStackable = sts;
+    }
+
+    public void SetCurrStack(int amount)
+    {
+        currStack = amount;
+    }
 }

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineGun : MonoBehaviour
+public class MachineGun : IWeapon
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override IEnumerator Fire(){
+        if(CanFire()){
+            Instantiate(bullet, bulletSpawnPos.transform.position, Quaternion.identity);
+            bullet.AddComponent<BoxCollider>().isTrigger = true;
 
-    // Update is called once per frame
-    void Update()
-    {
+            currMagSize--;
+            yield return new WaitForSeconds(fireDelay);
+        }
         
+        Debug.Log("RELOAD");
+
+        Reload();
     }
 }

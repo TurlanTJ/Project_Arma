@@ -28,22 +28,21 @@ public class InventoryManager : MonoBehaviour
         if(!item.isStackable && playerInventory.Count + 1 > playerInventorySize)
             return false;
 
-
         if(item.isStackable && playerInventory.Contains(item))
         {
             int newStack = playerInventory[playerInventory.IndexOf(item)].currStack + item.currStack;
 
             if(newStack <= item.maxStack)
             {
-                playerInventory[playerInventory.IndexOf(item)].currStack = newStack;
+                playerInventory[playerInventory.IndexOf(item)].SetCurrStack(newStack);
                 return true;
             }
             else
             {
                 int excessStack = newStack - item.maxStack;
 
-                item.currStack = excessStack;
-                playerInventory[playerInventory.IndexOf(item)].currStack = item.maxStack;
+                item.SetCurrStack(excessStack);
+                playerInventory[playerInventory.IndexOf(item)].SetCurrStack(item.maxStack);
 
                 if(playerInventory.Count + 1 > playerInventorySize)
                     return true;
@@ -107,7 +106,7 @@ public class InventoryManager : MonoBehaviour
         if(newStack <= 0)
             playerInventory.Remove(item);
         else
-            playerInventory[playerInventory.IndexOf(item)].currStack = newStack;
+            playerInventory[playerInventory.IndexOf(item)].SetCurrStack(newStack);
 
         return true;
     }

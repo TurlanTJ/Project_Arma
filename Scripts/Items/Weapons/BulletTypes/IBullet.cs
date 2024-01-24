@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBullet : IItem
+public abstract class IBullet : IItem
 {
-    string target { get; set; }
-    double damage { get; set; }
-    float bulletSpeed { get; set; }
+    public string target { get; protected set; }
+    public double damage { get; protected set; }
+    public float bulletSpeed { get; protected set; }
 
-    Vector3 initialPos { get; set; }
+    public Vector3 initialPos { get; protected set; }
 
-    BulletType bulletType { get; set; }
+    public BulletType bulletType { get; protected set; }
     
-    void DealDamage(Target target){}
-    void DealDamage(Target target, Vector3 targetPos){}
+    void Update()
+    {
+        
+    }
+
+    protected abstract void DealDamage(Target target);
+    protected abstract void DealDamage(Target target, Vector3 targetPos);
 }
